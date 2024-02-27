@@ -1,0 +1,14 @@
+{
+  "name": "aispunchcard",
+  "version": "1.0.0",
+  "description": "AIS Punch Card - Joseph Fuge, Tanner Atkin, Caleb Estes, Braden Toone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joseph Fuge, Tanner Atkin, Caleb Estes, Braden Toone",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-tools": "^13.3.1"
+  }
+}
