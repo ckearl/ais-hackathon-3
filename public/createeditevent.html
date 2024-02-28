@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIS Events - Create Event</title>
     <script type="module" src="/js/createeditevent.js"></script>
 </head>
+
 <body>
     <header>
-        
+
     </header>
-        <div class="main-content">
-            <form action="post">
-                <label for="eventTitle">Title:</label>
-                <input id="eventTitle" name="eventTitle" type="text">
-                <br>
-                <label for="eventDescription">Description:</label>
-                <textarea name="eventDescription" id="eventDescription" cols="40" rows="10"></textarea>
-                <br>
-                <label for="eventLocation">Location:</label>
-                <input id="eventLocation" name="eventLocation" type="text">
-                <br>
-
-                <label for="eventDate">Choose a date:</label>
-                <input type="date" id="eventDate" name="eventDate">
-                
-                <label for="eventTime">Choose a time:</label>
-                <input type="time" id="eventTime" name="eventTime">
-                
-                
-
-            </form>
+    <div class="main-content">
+        <form action="post">
+            <label for="eventTitle">Title:</label>
+            <input id="eventTitle" name="eventTitle" type="text">
             <br>
-            <button id="testEventButton" type="button">Create Test Event</button>
-        </div>
+            <label for="eventDescription">Description:</label>
+            <textarea name="eventDescription" id="eventDescription" cols="40" rows="10"></textarea>
+            <br>
+            <label for="eventLocation">Location:</label>
+            <input id="eventLocation" name="eventLocation" type="text">
+            <br>
+
+            <label for="eventDate">Choose a date:</label>
+            <input type="date" id="eventDate" name="eventDate">
+
+            <label for="eventTime">Choose a time:</label>
+            <input type="time" id="eventTime" name="eventTime">
+
+
+
+        </form>
+        <br>
+        <button id="testEventButton" type="button">Create Test Event</button>
+    </div>
     <footer>
 
     </footer>
 </body>
+
 </html>

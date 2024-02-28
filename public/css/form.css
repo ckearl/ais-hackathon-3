@@ -75,8 +75,10 @@ form button {
   border-radius: 2px;
 }
 
-form button:hover {
-  background-color: var(--primary-dark);
+@media (hover: hover) {
+  form button:hover {
+    background-color: var(--primary-dark);
+  }
 }
 
 /* Mobile */
