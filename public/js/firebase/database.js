@@ -2,7 +2,7 @@ import { firebaseConfig } from './firebaseConfig.js';
 // import { initializeApp } from 'firebase/app';
 // import { collection, addDoc } from 'firebase/firestore';
 import { initializeApp } from 'https://cdn.skypack.dev/firebase/app';
-import { getFirestore, collection, addDoc } from 'https://cdn.skypack.dev/firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs } from 'https://cdn.skypack.dev/firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
