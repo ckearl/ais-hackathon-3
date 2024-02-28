@@ -15,6 +15,7 @@ async function submitEvent(isFakeSubmit) {
             "Example Loc",
             "Example imgUrl",
             "",
+            "ExampleCategory",
             Timestamp.now(),
             // other event details
         );

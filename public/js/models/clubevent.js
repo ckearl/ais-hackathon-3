@@ -6,14 +6,16 @@ class ClubEvent {
     location = '';
     imgUrl = '';
     handshakeUrl = '';
+    category = '';
     datetime;
 
-    constructor(tempTitle, tempDescription, tempLocation, tempImgUrl, tempHandshakeUrl, tempDateTime) {
+    constructor(tempTitle, tempDescription, tempLocation, tempImgUrl, tempHandshakeUrl, tempCategory, tempDateTime) {
         this.title = tempTitle;
         this.description = tempDescription;
         this.location = tempLocation;
         this.imgUrl = tempImgUrl;
         this.handshakeUrl = tempHandshakeUrl;
+        this.tempCategory = tempCategory;
         this.datetime = tempDateTime;
     }
     
@@ -24,6 +26,7 @@ class ClubEvent {
             location: this.location,
             imgUrl: this.imgUrl,
             handshakeUrl: this.handshakeUrl,
+            tempCategory: this.tempCategory,
             datetime: this.datetime,
         };
     }
