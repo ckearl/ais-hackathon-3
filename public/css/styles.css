@@ -1,6 +1,8 @@
 :root {
   --primary-color: #28539f;
   --primary-dark: #0f2140;
+  --danger-color: #cc0000;
+  --danger-dark: #800000;
   --grey-accent: #c0c5c1;
   --off-white: #fafafa;
 }
@@ -9,6 +11,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  /* background-color: var(--primary-color); */
 }
 
 h1,
