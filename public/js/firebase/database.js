@@ -1,11 +1,10 @@
-import { firebaseConfig } from './firebaseConfig.js';
+// import { firebaseConfig } from './firebaseConfig.js';
 // import { initializeApp } from 'firebase/app';
 // import { collection, addDoc } from 'firebase/firestore';
-import { initializeApp } from 'https://cdn.skypack.dev/firebase/app';
+// import { initializeApp } from 'https://cdn.skypack.dev/firebase/app';
 import { getFirestore, collection, addDoc, getDocs } from 'https://cdn.skypack.dev/firebase/firestore';
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 class Database {
@@ -18,9 +17,10 @@ class Database {
         return docRef;
       } catch (error) {
         // console.error("Error adding document: ", error);
-        throw error; // Rethrow the error so it can be handled elsewhere
+        throw error; 
       }
     }
+
     async fetchEvents() {
       try{
         const docsSnapshot = await getDocs(collection(db, "events"));
