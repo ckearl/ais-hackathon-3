@@ -1,6 +1,6 @@
 
 class ClubEvent {
-    #id;
+    id;
     title = '';
     description = '';
     location = '';
@@ -9,7 +9,8 @@ class ClubEvent {
     category = '';
     datetime;
 
-    constructor(tempTitle, tempDescription, tempLocation, tempImgUrl, tempHandshakeUrl, tempCategory, tempDateTime) {
+    constructor(tempId, tempTitle, tempDescription, tempLocation, tempImgUrl, tempHandshakeUrl, tempCategory, tempDateTime) {
+        this.id = tempId;
         this.title = tempTitle;
         this.description = tempDescription;
         this.location = tempLocation;
@@ -20,16 +21,26 @@ class ClubEvent {
     }
     
     toFirestore() {
-        return {
-            title: this.title,
-            description: this.description,
-            location: this.location,
-            imgUrl: this.imgUrl,
-            handshakeUrl: this.handshakeUrl,
-            tempCategory: this.tempCategory,
-            datetime: this.datetime,
-        };
-    }
+        return     }
 }
 
-export { ClubEvent };
+const clubEventConverter = {
+    toFirestore: (event) => {
+        return {
+            id: event.id,
+            title: event.title,
+            description: event.description,
+            location: event.location,
+            imgUrl: event.imgUrl,
+            handshakeUrl: event.handshakeUrl,
+            tempCategory: event.tempCategory,
+            datetime: event.datetime,
+        };
+    },
+    fromFirestore: (snapshot, options) => {
+        const data = snapshot.data(options);
+        return new ClubEvent(data.id, data.title, data.description, data.location, data.imgUrl, data.handshakeUrl, data.category, data.datetime);
+    }
+};
+
+export { ClubEvent, clubEventConverter };

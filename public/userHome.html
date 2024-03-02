@@ -13,12 +13,15 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/home.css">
+  <script type="module" src="/js/firebase/auth.js"></script>
+  <script type="module" src="/js/userProfile.js"></script>
 </head>
 
 <body>
 
   <nav>
-    <a href="loggedOut.html">Logout</a>
+    <button type="button" id="userProfileBtn"><img class="filter-white" src="/assets/user-circle-thin.svg"  /></button>
+    <button type="button" id="signOutBtn">Logout</button>
   </nav>
   <a class="imgLink" href=""><img src="assets/logo.png"></a>
 
