@@ -4,7 +4,7 @@ import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "https://c
 const provider = new GoogleAuthProvider();
 
 /// Sign in event handlers
-const auth = getAuth();
+export const auth = getAuth();
 
 function signInGoogle() {
     signInWithPopup(auth, provider).then((result) => {
@@ -14,6 +14,7 @@ function signInGoogle() {
         // The signed-in user info.
         const user = result.user;
         
+
         console.log("Logged in!");
         signInNav();
     }).catch(error =>

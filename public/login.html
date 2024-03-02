@@ -13,6 +13,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/login.css">
   <script type="module" src="/js/firebase/auth.js"></script>
 </head>
 
@@ -22,6 +23,24 @@
     <h2>Login</h2>
     <div id="titleUnderline"></div>
     <button type="button" id="googleSignInBtn">Continue with Google</button>
+  </form>
+  
+  <form id="createAccount">
+    <h2>Create Account</h2>
+    <div id="titleUnderline"></div>
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <label for="studentType">Student Type</label>
+    <select id="studentType" name="studentType" required>
+      <option value="junior">IS Junior Core</option>
+      <option value="senior">IS Senior</option>
+      <option value="mism">MISM</option>
+      <option value="other-byu">Other BYU Student</option>
+      <option value="other-guest">Other/Guest</option>
+    </select>
+    <button type="submit">Create Account</button>
   </form>
 
 </body>

@@ -10,6 +10,7 @@ async function submitEvent(isFakeSubmit) {
     // } else {
     // ClubEvent(tempTitle, tempDescription, tempLocation, tempImgUrl, tempHandshakeUrl, tempDate) {
         uploadEvent = new ClubEvent(
+            "",
             "Example Title",
             "Example Desc",
             "Example Loc",
