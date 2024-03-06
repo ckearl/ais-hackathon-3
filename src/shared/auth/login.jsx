@@ -1,30 +1,16 @@
-import React from "react";
-import { AuthState } from "./authState";
+import { useContext } from "react";
 import { LoginPage } from "./loginPage";
 import { UserHome } from "../../member/userHome";
+import { FirebaseContext } from "../firebaseProvider";
 
-export function Login({ userId, authState, onAuthChange }) {
+export function Login({ userId, onAuthChange }) {
+  const fireContext = useContext(FirebaseContext);
+
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
-        {authState === AuthState.Unauthenticated ||
-          (authState === AuthState.Unknown && (
-            <h1>Welcome to AIS Punch Cards</h1>
-          ))}
-        {authState === AuthState.Authenticated && (
-          <UserHome
-            currentUser={userId}
-            onLogout={() => onAuthChange(userId, AuthState.Unauthenticated)}
-          />
-        )}
-        {authState === AuthState.Unauthenticated && (
-          <LoginPage
-            userId={userId}
-            onLogin={(loginUserId) => {
-              onAuthChange(loginUserId, AuthState.Authenticated);
-            }}
-          />
-        )}
+        {fireContext.isAuthenticated && <UserHome />}
+        {!fireContext.isAuthenticated && <LoginPage />}
       </div>
     </main>
   );

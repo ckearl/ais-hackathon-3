@@ -1,28 +1,25 @@
-import React from "react";
-import "../index.js";
-import { signInGoogle } from "./auth.js";
+import { useContext } from "react";
+import { FirebaseContext } from "../firebaseProvider";
 
-interface LoginPageProps {
-  userId: string;
-  onLogin: (userId: string) => void;
-}
+export function LoginPage() {
+  const fireContext = useContext(FirebaseContext);
 
-export function LoginPage({ userId, onLogin }: LoginPageProps) {
-  return (
-    <>
-      <form>
-        <h2>Login</h2>
-        <div id="titleUnderline"></div>
-        <input
-          id="googleSignInBtn"
-          type="button"
-          onClick={() => {
-            signInGoogle();
-            onLogin(userId);
-          }}
-          value="Login"
-        />
-      </form>
-    </>
-  );
+  if (fireContext !== null && fireContext !== undefined) {
+    return (
+      <>
+        <form>
+          <h2>Login</h2>
+          <div id="titleUnderline"></div>
+          <input
+            id="googleSignInBtn"
+            type="button"
+            onClick={async () => {
+              await fireContext?.googleSignIn();
+            }}
+            value="Login"
+          />
+        </form>
+      </>
+    );
+  }
 }

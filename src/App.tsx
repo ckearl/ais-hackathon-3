@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Header } from "./shared/header";
 import "./App.css";
-import { AuthState } from "./shared/auth/authState.js";
 import { FirebaseContext } from "./shared/firebaseProvider";
 import { Login } from "./shared/auth/login";
 import { UserHome } from "./member/userHome";
@@ -10,19 +9,11 @@ import { UserHome } from "./member/userHome";
 function App() {
   const context = useContext(FirebaseContext);
   const [userId, setUserId] = useState(context?.user?.id);
-  const currentAuthState = context?.user
-    ? AuthState.Authenticated
-    : AuthState.Unauthenticated;
-  const [authState, setAuthState] = useState(currentAuthState);
 
   return (
     <BrowserRouter>
       <div className="body bg-dark text-light">
-        <Header
-          authState={authState}
-          setAuthState={setAuthState}
-          userId={userId}
-        />
+        <Header />
 
         <Routes>
           <Route
@@ -30,9 +21,7 @@ function App() {
             element={
               <Login
                 userId={userId}
-                authState={authState}
-                onAuthChange={(userId: string, authState: AuthState) => {
-                  setAuthState(authState);
+                onAuthChange={(userId: string) => {
                   setUserId(userId);
                 }}
               />

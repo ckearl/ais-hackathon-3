@@ -1,12 +1,9 @@
-import { AuthState } from "./auth/authState.js";
+import { useContext } from "react";
+import { FirebaseContext } from "./firebaseProvider";
 
-interface HeaderProps {
-  authState: AuthState;
-  setAuthState: (newAuthState: AuthState) => void;
-  userId: string;
-}
+export function Header() {
+  const fireContext = useContext(FirebaseContext);
 
-export function Header({ ...HeaderProps }) {
   return (
     <header className="App-header">
       <a
@@ -18,6 +15,14 @@ export function Header({ ...HeaderProps }) {
         Learn React
       </a>
       <h1>This is Joseph test</h1>
+      <input
+        id="signOutButton"
+        type="button"
+        onClick={async () => {
+          await fireContext?.userSignOut();
+        }}
+        value="Sign Out"
+      />
     </header>
   );
 }
