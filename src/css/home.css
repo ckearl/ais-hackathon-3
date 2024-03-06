@@ -1,0 +1,204 @@
+/*body*/
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  height: 50px;
+  width: calc(100% - 50px);
+  padding: 0 25px;
+  background-color: var(--primary-dark);
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out;
+}
+
+#signOutBtn,
+#userProfileBtn {
+  color: white;
+  background-color: transparent !important; /* Force the background to be transparent */
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 3px 10px;
+  cursor: pointer;
+  outline: none;
+  font-size: 16px;
+  text-align: center; /* Ensure text is centered as it usually is in links */
+  -webkit-appearance: none; /* Remove default browser styling in WebKit browsers */
+  -moz-appearance: none; /* Remove default browser styling in Mozilla browsers */
+  appearance: none; /* Remove default browser styling */
+  transition: border 0.3s ease-in-out;
+}
+
+button:hover,
+button:focus {
+  border-color: white; /* Optional: change border color on hover/focus */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Optional: slight background color on hover/focus for visual feedback */
+}
+
+@media (hover: hover) {
+  nav a:hover {
+    border: 1px solid white;
+  }
+
+  #signOutBtn:hover {
+    border: 1px solid white;
+  }
+}
+
+a.imgLink {
+  position: fixed;
+  top: 0;
+  height: 35px;
+  margin: 7.5px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+a.imgLink img {
+  width: 35px;
+  height: 35px;
+}
+
+#bodyContainer {
+  min-width: 350px;
+  max-width: 675px;
+  width: calc(100vw - 200px);
+  margin: 85px 0 35px 0;
+  padding: 35px 50px 50px 50px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+#bodyContainer h2 {
+  margin: 0 0 10px 0;
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.eventListContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eventCard {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 20px);
+  margin: 10px 0;
+  padding: 0px 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.eventInfo {
+  padding: 0 10px 0 0;
+}
+
+.eventOpen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eventOpen a {
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: background-color 0.35s ease-in-out;
+}
+
+@media (hover: hover) {
+  .eventOpen a:hover {
+    background-color: var(--primary-dark);
+  }
+}
+
+#bodyContainer > .eventListContainer:nth-child(2) {
+  margin-top: 50px;
+}
+
+.eventActions {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.eventActions a {
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  margin: 0 0 0 10px;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: background-color 0.35s ease-in-out;
+}
+
+.eventActions > a:nth-child(1) {
+  background-color: var(--danger-color);
+}
+
+@media (hover: hover) {
+  .eventActions a:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .eventActions > a:nth-child(1):hover {
+    background-color: var(--danger-dark);
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 500px) {
+  body {
+    background-color: white;
+    font-size: 12px;
+  }
+
+  #bodyContainer {
+    padding: 50px 0;
+    margin: 35px 0 0 0;
+    border-radius: 0;
+    box-shadow: none;
+    align-items: center;
+    min-width: 0;
+    max-width: none;
+    width: 80vw;
+  }
+
+  #bodyContainer h2 {
+    font-size: 2rem;
+  }
+}
