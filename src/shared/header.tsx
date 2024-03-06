@@ -1,3 +1,5 @@
+import "../css/styles.css";
+import "../css/home.css";
 import { useContext } from "react";
 import { FirebaseContext } from "./firebaseProvider";
 
@@ -5,24 +7,20 @@ export function Header() {
   const fireContext = useContext(FirebaseContext);
 
   return (
-    <header className="App-header">
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
+    <header>
+      <nav>
+        <input
+          id="signOutButton"
+          type="button"
+          onClick={async () => {
+            await fireContext?.userSignOut();
+          }}
+          value="Sign Out"
+        />
+      </nav>
+      <a className="imgLink" href="">
+        <img src="/images/logo.png"></img>
       </a>
-      <h1>This is Joseph test</h1>
-      <input
-        id="signOutButton"
-        type="button"
-        onClick={async () => {
-          await fireContext?.userSignOut();
-        }}
-        value="Sign Out"
-      />
     </header>
   );
 }
