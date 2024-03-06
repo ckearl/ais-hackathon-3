@@ -1,88 +1,56 @@
-import React from "react";
-import logo from "./logo.svg";
+import { useState, useContext } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Header } from "./shared/header";
 import "./App.css";
+import { AuthState } from "./shared/auth/authState.js";
+import { FirebaseContext } from "./shared/firebaseProvider";
+import { Login } from "./shared/auth/login";
+import { UserHome } from "./member/userHome";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div id="bodyContainer">
-          <div className="eventListContainer">
-            <h2>Events Attended</h2>
-            <div className="eventCard">
-              <div className="eventInfo">
-                <h3>Event Name</h3>
-                <p>Event Location</p>
-                <p>Event Date</p>
-                <p>Event Time</p>
-              </div>
-              <div className="eventOpen">
-                {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-              </div>
-            </div>
-            <div className="eventCard">
-              <div className="eventInfo">
-                <h3>Event Name</h3>
-                <p>Event Location</p>
-                <p>Event Date</p>
-                <p>Event Time</p>
-              </div>
-              <div className="eventOpen">
-                {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-              </div>
-            </div>
-            <div className="eventCard">
-              <div className="eventInfo">
-                <h3>Event Name</h3>
-                <p>Event Location</p>
-                <p>Event Date</p>
-                <p>Event Time</p>
-              </div>
-              <div className="eventOpen">
-                {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-              </div>
-            </div>
-          </div>
+  const context = useContext(FirebaseContext);
+  const [userId, setUserId] = useState(context?.user?.id);
+  const currentAuthState = context?.user
+    ? AuthState.Authenticated
+    : AuthState.Unauthenticated;
+  const [authState, setAuthState] = useState(currentAuthState);
 
-          <div className="eventListContainer">
-            <h2>Upcoming Events</h2>
-            <div className="eventCard">
-              <div className="eventInfo">
-                <h3>Event Name</h3>
-                <p>Event Location</p>
-                <p>Event Date</p>
-                <p>Event Time</p>
-              </div>
-              <div className="eventOpen">
-                {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-              </div>
-            </div>
-            <div className="eventCard">
-              <div className="eventInfo">
-                <h3>Event Name</h3>
-                <p>Event Location</p>
-                <p>Event Date</p>
-                <p>Event Time</p>
-              </div>
-              <div className="eventOpen">
-                {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-              </div>
-            </div>
-            <div className="eventCard">
-              <div className="eventInfo">
-                <h3>Event Name</h3>
-                <p>Event Location</p>
-                <p>Event Date</p>
-                <p>Event Time</p>
-              </div>
-              <div className="eventOpen">
-                {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-    </div>
+  return (
+    <BrowserRouter>
+      <div className="body bg-dark text-light">
+        <Header
+          authState={authState}
+          setAuthState={setAuthState}
+          userId={userId}
+        />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Login
+                userId={userId}
+                authState={authState}
+                onAuthChange={(userId: string, authState: AuthState) => {
+                  setAuthState(authState);
+                  setUserId(userId);
+                }}
+              />
+            }
+            // exact
+          />
+          <Route path="/userHome" element={<UserHome />} />
+          {/* <Route path="/playgame" element={<PlayGame />} /> */}
+          {/* <Route path="/about" element={<About />} /> */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+
+        <footer>
+          <p>Author: Joseph Fuge</p>
+          <a href="https://github.com/JosephFuge/startup">GitHub</a>
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 

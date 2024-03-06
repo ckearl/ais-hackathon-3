@@ -1,4 +1,4 @@
-import "/js/index.js";
+import "../index.js";
 import {
   getAuth,
   signInWithPopup,
