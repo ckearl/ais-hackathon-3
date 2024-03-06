@@ -7,7 +7,7 @@ export function Header() {
   const fireContext = useContext(FirebaseContext);
 
   return (
-    <header>
+    <>
       <nav>
         <input
           id="signOutButton"
@@ -21,6 +21,6 @@ export function Header() {
       <a className="imgLink" href="">
         <img src="/images/logo.png"></img>
       </a>
-    </header>
+    </>
   );
 }

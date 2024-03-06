@@ -7,7 +7,8 @@
   --off-white: #fafafa;
 }
 
-body {
+/*body*/
+#root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -28,12 +29,14 @@ button {
 }
 
 /* To color an SVG green */
-.filter-green{
-  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+.filter-green {
+  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg)
+    brightness(118%) contrast(119%);
 }
 
 .filter-white {
-  filter: invert(98%) sepia(100%) saturate(7%) hue-rotate(182deg) brightness(101%) contrast(100%);
+  filter: invert(98%) sepia(100%) saturate(7%) hue-rotate(182deg)
+    brightness(101%) contrast(100%);
 }
 
 /* footer {

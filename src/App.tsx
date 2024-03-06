@@ -12,9 +12,8 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Header />
       <div className="body bg-dark text-light">
-        <Header />
-
         <Routes>
           <Route
             path="/"
