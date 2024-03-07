@@ -178,21 +178,24 @@ a.imgLink img {
 
 .eventInfo {
   padding: 0 10px 0 0;
+  width: 75%;
 }
 
 .eventOpen {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 25%;
+  text-align: center;
 }
 
 .eventOpen a {
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
-  padding: 5px 10px;
+  padding: 15px 10px;
   font-weight: 500;
-  border-radius: 2px;
+  border-radius: 5px;
   transition: background-color 0.35s ease-in-out;
 }
 
@@ -200,6 +203,25 @@ a.imgLink img {
   .eventOpen a:hover {
     background-color: var(--primary-dark);
   }
+}
+
+.eventAttendance {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0px 0 0;
+  width: 25%;
+}
+
+.eventAttendance > h3 {
+  font-size: 3em;
+  text-align: center;
+  margin: 0;
+}
+
+.eventAttendance > p {
+  margin: 0;
 }
 
 .eventActions {
