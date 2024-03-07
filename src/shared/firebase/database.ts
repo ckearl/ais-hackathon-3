@@ -13,6 +13,9 @@ import {
   getDoc,
   doc,
   Firestore,
+  updateDoc,
+  arrayUnion,
+  increment,
 } from "firebase/firestore";
 
 // Initialize Firebase
@@ -56,6 +59,41 @@ class Database {
     } catch (error) {
       throw error;
     }
+  }
+
+  async fetchEvent(eventId: string): Promise<ClubEvent | undefined> {
+    const eventRef = doc(this.db, "events", eventId).withConverter(
+      clubEventConverter
+    );
+    const eventSnapshot = await getDoc(eventRef);
+
+    if (!eventSnapshot.exists()) {
+      console.error("Event document does not exist");
+      return undefined;
+    }
+
+    // Returns undefined if no matching user is found
+    const eventData = eventSnapshot.data();
+    return eventData;
+  }
+
+  async registerAttendance(
+    eventId: string,
+    userId: string,
+    hasPlusOne: boolean
+  ) {
+    const eventRef = doc(this.db, "events", eventId);
+
+    // Construct the updates we want to make to the event. Only fields that are changing need to be included.
+    const updateData = {
+      userAttendees: arrayUnion(userId),
+    };
+
+    if (hasPlusOne) {
+      updateData.userAttendees = increment(1);
+    }
+
+    await updateDoc(eventRef, updateData);
   }
 
   async addUser(appUser: AppUser) {

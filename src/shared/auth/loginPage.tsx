@@ -12,11 +12,12 @@ export function LoginPage() {
           <div id="titleUnderline"></div>
           <input
             id="googleSignInBtn"
+            className="ais-button"
             type="button"
             onClick={async () => {
               await fireContext?.googleSignIn();
             }}
-            value="Login"
+            value="Continue With Google"
           />
         </form>
       </>
