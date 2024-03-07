@@ -22,12 +22,31 @@
     <div id="titleUnderline"></div>
     <label for="eventTitle">Event Title</label>
     <input type="text" id="eventTitle" name="eventTitle" required>
+    <p>Event Category</p>
+    <div class="radioSelector">
+      <input type="radio" id="discoverCategory" name="eventCategory" value="Discover" required>
+      <label for="discoverCategory">Discover</label>
+      <input type="radio" id="connectCategory" name="eventCategory" value="Connect" required>
+      <label for="connectCategory">Connect</label>
+      <input type="radio" id="socializeCategory" name="eventCategory" value="Socialize" required>
+      <label for="socializeCategory">Socialize</label>
+      <input type="radio" id="learnCategory" name="eventCategory" value="Learn" required>
+      <label for="learnCategory">Learn</label>
+      <input type="radio" id="serveCategory" name="eventCategory" value="Serve" required>
+      <label for="serveCategory">Serve</label>
+    </div>
     <label for="eventDate">Event Date</label>
     <input type="date" id="eventDate" name="eventDate" required>
     <label for="eventTime">Event Time</label>
     <input type="time" id="eventTime" name="eventTime" required>
+    <label for="eventTime">Event Duration (in hours)</label>
+    <input type="number" id="eventDuration" name="eventDuration" min="0" step="0.1" placeholder="0.5, 1, 2, etc." required>
     <label for="eventLocation">Event Location</label>
     <input type="text" id="eventLocation" name="eventLocation" placeholder="Room number, building, etc." required>
+    <label for="eventImage">Event Image (.jpeg, .png, etc.)</label>
+    <input type="file" id="eventImage" name="eventImage" accept="image/*">
+    <label for="eventHandshakeLink">Event Handshake Link</label>
+    <input type="text" id="eventHandshakeLink" name="eventHandshakeLink" required>
     <label for="eventDescription">Event Description</label>
     <textarea id="eventDescription" name="eventDescription" placeholder="Who the event is for, length of event, etc. " required></textarea>
     <button type="submit">Create Event</button>

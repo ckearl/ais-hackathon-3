@@ -24,14 +24,29 @@
     <input type="text" id="firstName" name="firstName" required>
     <label for="lastName">Last Name</label>
     <input type="text" id="lastName" name="lastName" required>
-    <label for="studentType">Student Type</label>
-    <select id="studentType" name="studentType" required>
+    <label for="netID">Net ID</label>
+    <input type="text" id="netID" name="netID" required>
+    <p>Student Type</p>
+    <div class="radioSelector">
+      <input type="radio" id="junior" name="studentType" value="junior" required>
+      <label for="junior">IS Junior Core</label>
+      <input type="radio" id="senior" name="studentType" value="senior" required>
+      <label for="senior">IS Senior</label>
+      <input type="radio" id="mism" name="studentType" value="mism" required>
+      <label for="mism">MISM</label>
+      <input type="radio" id="other-byu" name="studentType" value="other-byu" required>
+      <label for="other-byu">BYU Student</label>
+      <input type="radio" id="other-guest" name="studentType" value="other-guest" required>
+      <label for="other-guest">Other/Guest</label>
+    </div>
+
+    <!-- <select id="studentType" name="studentType" required>
       <option value="junior">IS Junior Core</option>
       <option value="senior">IS Senior</option>
       <option value="mism">MISM</option>
       <option value="other-byu">Other BYU Student</option>
       <option value="other-guest">Other/Guest</option>
-    </select>
+    </select> -->
     <button type="submit">Create Account</button>
   </form>
 
