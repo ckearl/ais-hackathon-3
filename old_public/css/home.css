@@ -28,7 +28,8 @@ nav a {
   transition: border 0.3s ease-in-out;
 }
 
-#signOutBtn, #userProfileBtn {
+#signOutBtn,
+#userProfileBtn {
   color: white;
   background-color: transparent !important; /* Force the background to be transparent */
   border: 1px solid transparent;
@@ -44,7 +45,8 @@ nav a {
   transition: border 0.3s ease-in-out;
 }
 
-button:hover, button:focus {
+nav button:hover,
+nav button:focus {
   border-color: white; /* Optional: change border color on hover/focus */
   background-color: rgba(255, 255, 255, 0.1); /* Optional: slight background color on hover/focus for visual feedback */
 }
@@ -53,7 +55,7 @@ button:hover, button:focus {
   nav a:hover {
     border: 1px solid white;
   }
-  
+
   #signOutBtn:hover {
     border: 1px solid white;
   }
@@ -77,7 +79,7 @@ a.imgLink img {
   min-width: 350px;
   max-width: 675px;
   width: calc(100vw - 200px);
-  margin: 85px 0 35px 0;
+  margin: 50px 0 0 0;
   padding: 35px 50px 50px 50px;
   border-radius: 10px;
   background-color: white;
@@ -93,11 +95,75 @@ a.imgLink img {
   color: var(--primary-color);
 }
 
+#toggleEventList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 25px 0 25px 0;
+}
+
+#toggleEventList > button {
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 25px;
+  color: var(--primary-color);
+  background-color: white;
+  border: 1.5px solid var(--primary-color);
+  transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out, border 0.35s ease-in-out;
+}
+
+#toggleEventList > button.toggleOn {
+  color: white;
+  background-color: var(--primary-color);
+  border: 1.5px solid transparent;
+}
+
+@media (hover: hover) {
+  #toggleEventList > button.toggleOn:hover {
+    background-color: var(--primary-dark);
+  }
+
+  #toggleEventList > button:hover {
+    background-color: var(--grey-accent-light);
+  }
+}
+
+#attendedProgress {
+  margin: 0 0 25px 0;
+}
+
+#attendedProgress > h3 {
+  text-align: center;
+}
+
+#attendedProgress > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+#attendedProgress > div > p {
+  text-align: center;
+  margin: 0;
+}
+
+#attendedProgress > div > p > span {
+  font-weight: 700;
+}
+
 .eventListContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.eventListContainer.hidden {
+  display: none;
 }
 
 .eventCard {
@@ -134,10 +200,6 @@ a.imgLink img {
   .eventOpen a:hover {
     background-color: var(--primary-dark);
   }
-}
-
-#bodyContainer > .eventListContainer:nth-child(2) {
-  margin-top: 50px;
 }
 
 .eventActions {

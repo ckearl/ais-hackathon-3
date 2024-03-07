@@ -4,6 +4,7 @@
   --danger-color: #cc0000;
   --danger-dark: #800000;
   --grey-accent: #c0c5c1;
+  --grey-accent-light: #e0e5e1;
   --off-white: #fafafa;
 }
 
@@ -28,7 +29,7 @@ button {
 }
 
 /* To color an SVG green */
-.filter-green{
+.filter-green {
   filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
 }
 

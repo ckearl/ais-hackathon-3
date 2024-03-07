@@ -30,8 +30,23 @@ a {
   transition: background-color 0.35s ease-in-out;
 }
 
+#yesNoContainer {
+  display: flex;
+  gap: 10px;
+}
+
+a.no {
+  background-color: white;
+  color: var(--primary-color);
+  border: 1.5px solid var(--primary-color);
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: var(--primary-dark);
+  }
+
+  a.no:hover {
+    background-color: var(--grey-accent-light);
   }
 }
