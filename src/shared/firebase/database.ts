@@ -4,7 +4,7 @@
 // import { initializeApp } from 'https://cdn.skypack.dev/firebase/app';
 import { FirebaseApp } from "firebase/app";
 import { AppUser, appUserConverter } from "../../models/appuser.js";
-import { ClubEvent, clubEventConverter } from "../../models/clubevent.js";
+import { ClubEvent, clubEventConverter } from "../../models/clubevent";
 import {
   getFirestore,
   collection,
@@ -13,6 +13,9 @@ import {
   getDoc,
   doc,
   Firestore,
+  updateDoc,
+  arrayUnion,
+  increment,
 } from "firebase/firestore";
 
 // Initialize Firebase
@@ -27,10 +30,6 @@ class Database {
   // Function to add an event to the "events" collection
   async addEvent(event: ClubEvent) {
     try {
-      if (event["id"]) {
-        delete event["id"];
-      }
-
       const docRef = await addDoc(
         collection(this.db, "events"),
         clubEventConverter.toFirestore(event)
@@ -56,6 +55,45 @@ class Database {
     } catch (error) {
       throw error;
     }
+  }
+
+  async fetchEvent(eventId: string): Promise<ClubEvent | undefined> {
+    const eventRef = doc(this.db, "events", eventId).withConverter(
+      clubEventConverter
+    );
+    const eventSnapshot = await getDoc(eventRef);
+
+    if (!eventSnapshot.exists()) {
+      console.error("Event document does not exist");
+      return undefined;
+    }
+
+    // Returns undefined if no matching user is found
+    const eventData = eventSnapshot.data();
+    return eventData;
+  }
+
+  async registerAttendance(
+    eventId: string,
+    userId: string,
+    hasPlusOne: boolean
+  ) {
+    const eventRef = doc(this.db, "events", eventId);
+
+    // Construct the updates we want to make to the event. Only fields that are changing need to be included.
+    let updateData;
+    if (hasPlusOne) {
+      updateData = {
+        userAttendees: arrayUnion(userId),
+        additionalAttendance: increment(1),
+      };
+    } else {
+      updateData = {
+        userAttendees: arrayUnion(userId),
+      };
+    }
+
+    await updateDoc(eventRef, updateData);
   }
 
   async addUser(appUser: AppUser) {

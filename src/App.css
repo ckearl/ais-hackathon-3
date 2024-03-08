@@ -36,3 +36,86 @@
     transform: rotate(360deg);
   }
 }
+
+#signOutBtn {
+  max-width: min-content;
+  margin-top: 24px;
+}
+
+.ais-button {
+  color: white;
+  background-color: transparent; /* Force the background to be transparent */
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 3px 10px;
+  max-width: fit-content;
+  cursor: pointer;
+  outline: none;
+  font-size: 16px;
+  text-align: center; /* Ensure text is centered as it usually is in links */
+  -webkit-appearance: none; /* Remove default browser styling in WebKit browsers */
+  -moz-appearance: none; /* Remove default browser styling in Mozilla browsers */
+  appearance: none; /* Remove default browser styling */
+  transition: border 0.3s ease-in-out;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  height: 50px;
+  width: calc(100% - 50px);
+  padding: 0 25px;
+  background-color: var(--primary-dark);
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out;
+}
+
+button:hover,
+button:focus {
+  border-color: white; /* Optional: change border color on hover/focus */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Optional: slight background color on hover/focus for visual feedback */
+}
+
+@media (hover: hover) {
+  nav a:hover {
+    border: 1px solid white;
+  }
+
+  #signOutBtn:hover,
+  #googleSignInBtn:hover {
+    border: 1px solid white;
+  }
+}
+
+#googleSignInBtn {
+  margin: 0 auto;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  max-width: fit-content;
+  font-size: 24px;
+  transition: border 0.3s ease-in-out;
+}
+
+.background-ais {
+  background-color: #0f2140;
+}

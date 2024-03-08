@@ -3,7 +3,7 @@ import { LoginPage } from "./loginPage";
 import { UserHome } from "../../member/userHome";
 import { FirebaseContext } from "../firebaseProvider";
 
-export function Login({ userId, onAuthChange }) {
+export function Login() {
   const fireContext = useContext(FirebaseContext);
 
   return (

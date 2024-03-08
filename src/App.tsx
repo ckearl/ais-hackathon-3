@@ -1,42 +1,53 @@
-import { useState, useContext } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Header } from "./shared/header";
 import "./App.css";
-import { FirebaseContext } from "./shared/firebaseProvider";
+import "./css/styles.css";
+import "./css/form.css";
 import { Login } from "./shared/auth/login";
+import { EventCheckInPage } from "./member/eventCheckInPage";
+import ProtectedRoute from "./officer/protectedRoute";
+import { CreateEvent } from "./officer/createEditEvent";
 import { UserHome } from "./member/userHome";
+import { ViewEvent } from "./officer/viewEvent";
 
 function App() {
-  const context = useContext(FirebaseContext);
-  const [userId, setUserId] = useState(context?.user?.id);
-
   return (
     <BrowserRouter>
       <Header />
       <div className="body bg-dark text-light">
         <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/event/:eventId" element={<EventCheckInPage />} />
+
+          {/* Routes containing a ProtectedRoute are meant to ensure the user is authenticated before being able to visit them */}
+          {/* In cases where isOfficerOnly is true, these routes also ensure the user is an officer before being able to visit them */}
+
           <Route
-            path="/"
+            path="/createEvent"
             element={
-              <Login
-                userId={userId}
-                onAuthChange={(userId: string) => {
-                  setUserId(userId);
-                }}
-              />
+              <ProtectedRoute isOfficerOnly={true} element={<CreateEvent />} />
             }
-            // exact
           />
-          <Route path="/userHome" element={<UserHome />} />
-          {/* <Route path="/playgame" element={<PlayGame />} /> */}
-          {/* <Route path="/about" element={<About />} /> */}
+          <Route
+            path="/viewEvent/:eventId"
+            element={
+              <ProtectedRoute isOfficerOnly={true} element={<ViewEvent />} />
+            }
+          />
+          <Route
+            path="/adminHome"
+            element={
+              <ProtectedRoute isOfficerOnly={true} element={<UserHome />} />
+            }
+          />
+          <Route
+            path="/userHome"
+            element={
+              <ProtectedRoute isOfficerOnly={false} element={<UserHome />} />
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-
-        <footer>
-          <p>Author: Joseph Fuge</p>
-          <a href="https://github.com/JosephFuge/startup">GitHub</a>
-        </footer>
       </div>
     </BrowserRouter>
   );

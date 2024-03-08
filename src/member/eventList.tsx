@@ -1,42 +1,21 @@
-import React from "react";
+import { EventCard } from "./eventCard";
+import { ClubEvent } from "../models/clubevent";
 
-export function EventList() {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface EventListProps {
+  events: ClubEvent[];
+}
+
+export function EventList({ ...EventListProps }) {
   return (
     <div className="eventListContainer">
-      <h2>Events Attended</h2>
-      <div className="eventCard">
-        <div className="eventInfo">
-          <h3>Event Name</h3>
-          <p>Event Location</p>
-          <p>Event Date</p>
-          <p>Event Time</p>
-        </div>
-        <div className="eventOpen">
-          {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-        </div>
-      </div>
-      <div className="eventCard">
-        <div className="eventInfo">
-          <h3>Event Name</h3>
-          <p>Event Location</p>
-          <p>Event Date</p>
-          <p>Event Time</p>
-        </div>
-        <div className="eventOpen">
-          {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-        </div>
-      </div>
-      <div className="eventCard">
-        <div className="eventInfo">
-          <h3>Event Name</h3>
-          <p>Event Location</p>
-          <p>Event Date</p>
-          <p>Event Time</p>
-        </div>
-        <div className="eventOpen">
-          {/* <!-- <a href="viewEvent.html">Open</a> --> */}
-        </div>
-      </div>
+      {EventListProps.events.length === 0 && (
+        <h3>No events to be displayed.</h3>
+      )}
+      {EventListProps.events.length > 0 &&
+        EventListProps.events.map((curEvent: ClubEvent, index: number) => (
+          <EventCard key={index} event={curEvent} />
+        ))}
     </div>
   );
 }
