@@ -1,21 +1,24 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { FirebaseContext } from "../shared/firebaseProvider";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import "../css/submit_success.css";
+import { ClubEvent } from "../models/clubevent";
 
 export function EventCheckInPage() {
   const { eventId } = useParams();
   const fireContext = useContext(FirebaseContext);
   const db = useMemo(() => fireContext?.db, [fireContext]);
+  const navigate = useNavigate();
+  const [curEvent, setCurEvent] = useState<ClubEvent | null>(null);
 
-  const [eventName, setEventName] = useState("");
-
+  // Get current event so we can check for handshake url
   useEffect(() => {
     const initFetchEvent = async () => {
       if (db && eventId) {
         const clubEvent = await db.fetchEvent(eventId);
 
         if (clubEvent) {
-          setEventName(clubEvent.title);
+          setCurEvent(clubEvent);
         }
       }
     };
@@ -38,44 +41,67 @@ export function EventCheckInPage() {
         </form>
       )}
       {eventId && (
-        <form>
-          <h2>{eventName}</h2>
-          <div id="titleUnderline"></div>
-          <input
-            className="ais-button background-ais"
-            type="button"
-            onClick={async () => {
-              if (!fireContext?.isAuthenticated) {
-                await fireContext?.googleSignIn();
-              }
+        <div className="center-block">
+          <h2>Did you bring a plus one with you?</h2>
+          <p>Select one of the following to complete your check in.</p>
+          <div id="yesNoContainer">
+            <button
+              onClick={async () => {
+                if (!fireContext?.isAuthenticated) {
+                  await fireContext?.googleSignIn();
+                }
 
-              await db?.registerAttendance(
-                eventId,
-                fireContext?.user?.id,
-                true
-              );
-              // TODO: navigate to home page or to Handshake
-            }}
-            value="Yes"
-          />
-          <input
-            className="ais-button background-ais"
-            type="button"
-            onClick={async () => {
-              if (!fireContext?.isAuthenticated) {
-                await fireContext?.googleSignIn();
-              }
+                await db?.registerAttendance(
+                  eventId,
+                  fireContext?.user?.id,
+                  true
+                );
 
-              await db?.registerAttendance(
-                eventId,
-                fireContext?.user?.id,
-                false
-              );
-              // TODO: navigate to home page or to Handshake
-            }}
-            value="No"
-          />
-        </form>
+                // If event has external navigation url (like handshake) send them there
+                // Otherwise, take them back to the home page
+                if (
+                  curEvent != null &&
+                  curEvent.externalUrl &&
+                  curEvent.externalUrl.length > 0
+                ) {
+                  window.location.href = curEvent.externalUrl;
+                } else {
+                  navigate("/");
+                }
+              }}
+            >
+              Yes
+            </button>
+            <button
+              className="no"
+              onClick={async () => {
+                if (!fireContext?.isAuthenticated) {
+                  await fireContext?.googleSignIn();
+                }
+
+                await db?.registerAttendance(
+                  eventId,
+                  fireContext?.user?.id,
+                  false
+                );
+
+                // If event has external navigation url (like handshake) send them there
+                // Otherwise, take them back to the home page
+                if (
+                  curEvent != null &&
+                  curEvent.externalUrl &&
+                  curEvent.externalUrl.length > 0
+                ) {
+                  window.location.href = curEvent.externalUrl;
+                } else {
+                  navigate("/");
+                }
+              }}
+            >
+              No
+            </button>
+          </div>
+        </div>
       )}
     </>
   );

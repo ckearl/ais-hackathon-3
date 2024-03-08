@@ -4,7 +4,7 @@ class ClubEvent {
   description = "";
   location = "";
   imgUrl = "";
-  handshakeUrl = "";
+  externalUrl = "";
   category = "";
   datetime;
   userAttendees = [];
@@ -16,7 +16,7 @@ class ClubEvent {
     tempDescription,
     tempLocation,
     tempImgUrl,
-    tempHandshakeUrl,
+    tempExternalUrl,
     tempCategory,
     tempDateTime,
     tempUserAttendees,
@@ -27,8 +27,8 @@ class ClubEvent {
     this.description = tempDescription;
     this.location = tempLocation;
     this.imgUrl = tempImgUrl;
-    this.handshakeUrl = tempHandshakeUrl;
-    this.tempCategory = tempCategory;
+    this.externalUrl = tempExternalUrl;
+    this.category = tempCategory;
     this.datetime = tempDateTime;
     this.userAttendees = tempUserAttendees;
     this.additionalAttendance = tempAdditionalAttendance;
@@ -43,8 +43,8 @@ const clubEventConverter = {
       description: event.description,
       location: event.location,
       imgUrl: event.imgUrl,
-      handshakeUrl: event.handshakeUrl,
-      tempCategory: event.tempCategory,
+      externalUrl: event.externalUrl,
+      category: event.tempCategory,
       datetime: event.datetime,
       userAttendees: event.userAttendees,
       additionalAttendance: event.additionalAttendance,
@@ -58,7 +58,7 @@ const clubEventConverter = {
       data.description,
       data.location,
       data.imgUrl,
-      data.handshakeUrl,
+      data.externalUrl,
       data.category,
       data.datetime,
       data.userAttendees,
