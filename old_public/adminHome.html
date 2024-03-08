@@ -24,45 +24,11 @@
   <a class="imgLink" href=""><img src="assets/logo.png"></a>
 
   <div id="bodyContainer">
-
-    <div class="eventListContainer">
-      <h2>Upcoming Events</h2>
-      <div class="eventCard">
-        <div class="eventInfo">
-          <h3>BYU Marriott Connect</h3>
-          <p>TRNB W408/410</p>
-          <p>February 29, 12:00pm - 1:30pm</p>
-          <p>Tie blankets and network with BYU Marriott Alumni! Lunch will be provided</p>
-        </div>
-        <div class="eventOpen">
-          <a href="viewEvent.html">Open</a>
-        </div>
-      </div>
-      <div class="eventCard">
-        <div class="eventInfo">
-          <h3>Event Name</h3>
-          <p>Event Location</p>
-          <p>Event Date</p>
-          <p>Event Time</p>
-        </div>
-        <div class="eventOpen">
-          <a href="viewEvent.html">Open</a>
-        </div>
-      </div>
-      <div class="eventCard">
-        <div class="eventInfo">
-          <h3>Event Name</h3>
-          <p>Event Location</p>
-          <p>Event Date</p>
-          <p>Event Time</p>
-        </div>
-        <div class="eventOpen">
-          <a href="viewEvent.html">Open</a>
-        </div>
-      </div>
+    <div id="toggleEventList">
+      <button id="previousToggle" class="toggleOn" onclick="toggle()">Previous</button>
+      <button id="upcomingToggle" onclick="toggle()">Upcoming</button>
     </div>
-
-    <div class="eventListContainer">
+    <div class="eventListContainer" id="previousContainer">
       <h2>Previous Events</h2>
       <div class="eventCard">
         <div class="eventInfo">
@@ -71,6 +37,57 @@
           <p>Event Date</p>
           <p>Event Time</p>
         </div>
+        <div class="eventAttendance">
+          <h3>53</h3>
+          <p>Attended</p>
+        </div>
+      </div>
+      <div class="eventCard">
+        <div class="eventInfo">
+          <h3>Event Name</h3>
+          <p>Event Location</p>
+          <p>Event Date</p>
+          <p>Event Time</p>
+        </div>
+        <div class="eventAttendance">
+          <h3>200</h3>
+          <p>Attended</p>
+        </div>
+      </div>
+      <div class="eventCard">
+        <div class="eventInfo">
+          <h3>Event Name</h3>
+          <p>Event Location</p>
+          <p>Event Date</p>
+          <p>Event Time</p>
+        </div>
+        <div class="eventAttendance">
+          <h3>5</h3>
+          <p>Attended</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="eventListContainer hidden" id="upcomingContainer">
+      <h2>Upcoming Events</h2>
+      <div class="eventCard">
+        <div class="eventInfo">
+          <h3>Event Name</h3>
+          <p>Event Location</p>
+          <p>Event Date</p>
+          <p>Event Time</p>
+        </div>
+        <div class="eventOpen">
+          <a href="viewEvent.html">Open</a>
+        </div>
+      </div>
+      <div class="eventCard">
+        <div class="eventInfo">
+          <h3>Event Name</h3>
+          <p>Event Location</p>
+          <p>Event Date</p>
+          <p>Event Time</p>
+        </div>
         <div class="eventOpen">
           <a href="viewEvent.html">Open</a>
         </div>
@@ -87,21 +104,17 @@
         </div>
       </div>
     </div>
-    <div class="eventCard">
-      <div class="eventInfo">
-        <h3>Event Name</h3>
-        <p>Event Location</p>
-        <p>Event Date</p>
-        <p>Event Time</p>
-      </div>
-      <div class="eventOpen">
-        <a href="viewEvent.html">Open</a>
-      </div>
-    </div>
-  </div>
 
   </div>
 
+  <script>
+    function toggle() {
+      document.getElementById("previousToggle").classList.toggle('toggleOn');
+      document.getElementById("upcomingToggle").classList.toggle('toggleOn');
+      document.getElementById("previousContainer").classList.toggle('hidden');
+      document.getElementById("upcomingContainer").classList.toggle('hidden');
+    }
+  </script>
 </body>
 
 </html>

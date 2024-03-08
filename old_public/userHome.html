@@ -20,15 +20,28 @@
 <body>
 
   <nav>
-    <button type="button" id="userProfileBtn"><img class="filter-white" src="/assets/user-circle-thin.svg"  /></button>
+    <button type="button" id="userProfileBtn"><img class="filter-white" src="/assets/user-circle-thin.svg" /></button>
     <button type="button" id="signOutBtn">Logout</button>
   </nav>
   <a class="imgLink" href=""><img src="assets/logo.png"></a>
 
   <div id="bodyContainer">
-
-    <div class="eventListContainer">
-      <h2>Events Attended</h2>
+    <div id="toggleEventList">
+      <button id="attendedToggle" class="toggleOn" onclick="toggle()">Attended</button>
+      <button id="upcomingToggle" onclick="toggle()">Upcoming</button>
+    </div>
+    <div class="eventListContainer" id="attendedContainer">
+      <h2>Attended Events</h2>
+      <div id="attendedProgress">
+        <h3>Total: 5/10</h3>
+        <div>
+          <p>2/4<br><span>Discover</span></p>
+          <p>0/3<br><span>Connect</span></p>
+          <p>1/2<br><span>Socialize</span></p>
+          <p>0/2<br><span>Learn</span></p>
+          <p>1/4<br><span>Serve</span></p>
+        </div>
+      </div>
       <div class="eventCard">
         <div class="eventInfo">
           <h3>Event Name</h3>
@@ -64,7 +77,7 @@
       </div>
     </div>
 
-    <div class="eventListContainer">
+    <div class="eventListContainer hidden" id="upcomingContainer">
       <h2>Upcoming Events</h2>
       <div class="eventCard">
         <div class="eventInfo">
@@ -102,6 +115,15 @@
     </div>
 
   </div>
+
+  <script>
+    function toggle() {
+      document.getElementById("attendedToggle").classList.toggle('toggleOn');
+      document.getElementById("upcomingToggle").classList.toggle('toggleOn');
+      document.getElementById("attendedContainer").classList.toggle('hidden');
+      document.getElementById("upcomingContainer").classList.toggle('hidden');
+    }
+  </script>
 </body>
 
 </html>
