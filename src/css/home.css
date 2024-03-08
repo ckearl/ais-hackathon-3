@@ -230,13 +230,18 @@ a.imgLink img {
   margin: 0;
 }
 
+.link-button {
+  max-width: fit-content;
+}
+
 .eventActions {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
 }
 
-.eventActions a {
+.eventActions a,
+.link-button {
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;

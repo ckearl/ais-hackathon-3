@@ -6,8 +6,9 @@ import "./css/form.css";
 import { Login } from "./shared/auth/login";
 import { EventCheckInPage } from "./member/eventCheckInPage";
 import ProtectedRoute from "./officer/protectedRoute";
-import CreateEvent from "./officer/createEditEvent";
+import { CreateEvent } from "./officer/createEditEvent";
 import { UserHome } from "./member/userHome";
+import { ViewEvent } from "./officer/viewEvent";
 
 function App() {
   return (
@@ -25,6 +26,12 @@ function App() {
             path="/createEvent"
             element={
               <ProtectedRoute isOfficerOnly={true} element={<CreateEvent />} />
+            }
+          />
+          <Route
+            path="/viewEvent/:eventId"
+            element={
+              <ProtectedRoute isOfficerOnly={true} element={<ViewEvent />} />
             }
           />
           <Route

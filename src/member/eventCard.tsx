@@ -3,6 +3,7 @@ import { ClubEvent } from "../models/clubevent";
 import { FirebaseContext } from "../shared/firebaseProvider";
 import "../css/styles.css";
 import "../css/home.css";
+import { Link } from "react-router-dom";
 
 interface EventCardProps {
   event: ClubEvent;
@@ -38,7 +39,7 @@ export function EventCard({ ...EventCardProps }) {
         fireContext.user != null &&
         fireContext.user.isOfficer && (
           <div className="eventOpen">
-            <a href="/viewEvent">Open</a>
+            <Link to={`/viewEvent/${EventCardProps.event.id}`}>Open</Link>
           </div>
         )}
     </div>
