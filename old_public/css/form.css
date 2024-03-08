@@ -105,7 +105,11 @@ form button {
 }
 
 .radioSelector input {
-  display: none;
+  margin: 1.75em 0 0 0;
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  left: 0;
 }
 
 .radioSelector input:checked + label {
