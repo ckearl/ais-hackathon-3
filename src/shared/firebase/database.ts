@@ -4,7 +4,7 @@
 // import { initializeApp } from 'https://cdn.skypack.dev/firebase/app';
 import { FirebaseApp } from "firebase/app";
 import { AppUser, appUserConverter } from "../../models/appuser.js";
-import { ClubEvent, clubEventConverter } from "../../models/clubevent.js";
+import { ClubEvent, clubEventConverter } from "../../models/clubevent";
 import {
   getFirestore,
   collection,
@@ -30,10 +30,6 @@ class Database {
   // Function to add an event to the "events" collection
   async addEvent(event: ClubEvent) {
     try {
-      if (event["id"]) {
-        delete event["id"];
-      }
-
       const docRef = await addDoc(
         collection(this.db, "events"),
         clubEventConverter.toFirestore(event)

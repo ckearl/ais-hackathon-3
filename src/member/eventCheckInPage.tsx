@@ -3,6 +3,7 @@ import { FirebaseContext } from "../shared/firebaseProvider";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../css/submit_success.css";
 import { ClubEvent } from "../models/clubevent";
+import { getAuth } from "firebase/auth";
 
 export function EventCheckInPage() {
   const { eventId } = useParams();
@@ -51,22 +52,33 @@ export function EventCheckInPage() {
                   await fireContext?.googleSignIn();
                 }
 
-                await db?.registerAttendance(
-                  eventId,
-                  fireContext?.user?.id,
-                  true
-                );
+                const auth = getAuth();
 
-                // If event has external navigation url (like handshake) send them there
-                // Otherwise, take them back to the home page
-                if (
-                  curEvent != null &&
-                  curEvent.externalUrl &&
-                  curEvent.externalUrl.length > 0
-                ) {
-                  window.location.href = curEvent.externalUrl;
-                } else {
-                  navigate("/");
+                let curUserId: undefined | string = undefined;
+                if (auth && auth.currentUser) {
+                  curUserId = auth.currentUser.uid;
+                } else if (fireContext && fireContext.user) {
+                  curUserId = fireContext.user.id;
+                }
+
+                if (curUserId !== undefined) {
+                  await db?.registerAttendance(
+                    eventId,
+                    fireContext?.user?.id,
+                    true
+                  );
+
+                  // If event has external navigation url (like handshake) send them there
+                  // Otherwise, take them back to the home page
+                  if (
+                    curEvent != null &&
+                    curEvent.externalUrl &&
+                    curEvent.externalUrl.length > 0
+                  ) {
+                    window.location.href = curEvent.externalUrl;
+                  } else {
+                    navigate("/");
+                  }
                 }
               }}
             >
@@ -79,22 +91,33 @@ export function EventCheckInPage() {
                   await fireContext?.googleSignIn();
                 }
 
-                await db?.registerAttendance(
-                  eventId,
-                  fireContext?.user?.id,
-                  false
-                );
+                const auth = getAuth();
 
-                // If event has external navigation url (like handshake) send them there
-                // Otherwise, take them back to the home page
-                if (
-                  curEvent != null &&
-                  curEvent.externalUrl &&
-                  curEvent.externalUrl.length > 0
-                ) {
-                  window.location.href = curEvent.externalUrl;
-                } else {
-                  navigate("/");
+                let curUserId: undefined | string = undefined;
+                if (auth && auth.currentUser) {
+                  curUserId = auth.currentUser.uid;
+                } else if (fireContext && fireContext.user) {
+                  curUserId = fireContext.user.id;
+                }
+
+                if (curUserId !== undefined) {
+                  await db?.registerAttendance(
+                    eventId,
+                    fireContext?.user?.id,
+                    false
+                  );
+
+                  // If event has external navigation url (like handshake) send them there
+                  // Otherwise, take them back to the home page
+                  if (
+                    curEvent != null &&
+                    curEvent.externalUrl &&
+                    curEvent.externalUrl.length > 0
+                  ) {
+                    window.location.href = curEvent.externalUrl;
+                  } else {
+                    navigate("/");
+                  }
                 }
               }}
             >

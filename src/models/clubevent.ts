@@ -1,26 +1,33 @@
+import {
+  DocumentData,
+  QueryDocumentSnapshot,
+  SnapshotOptions,
+  Timestamp,
+} from "firebase/firestore";
+
 class ClubEvent {
-  id;
-  title = "";
-  description = "";
-  location = "";
-  imgUrl = "";
-  externalUrl = "";
-  category = "";
-  datetime;
-  userAttendees = [];
-  additionalAttendance = 0;
+  id: string | null;
+  title: string = "";
+  description: string = "";
+  location: string = "";
+  imgUrl: string = "";
+  externalUrl: string = "";
+  category: string = "";
+  datetime: Timestamp;
+  userAttendees: string[] = [];
+  additionalAttendance: number = 0;
 
   constructor(
-    tempId,
-    tempTitle,
-    tempDescription,
-    tempLocation,
-    tempImgUrl,
-    tempExternalUrl,
-    tempCategory,
-    tempDateTime,
-    tempUserAttendees,
-    tempAdditionalAttendance
+    tempId: string | null,
+    tempTitle: string,
+    tempDescription: string,
+    tempLocation: string,
+    tempImgUrl: string,
+    tempExternalUrl: string,
+    tempCategory: string,
+    tempDateTime: Timestamp,
+    tempUserAttendees: string[],
+    tempAdditionalAttendance: number
   ) {
     this.id = tempId;
     this.title = tempTitle;
@@ -36,7 +43,7 @@ class ClubEvent {
 }
 
 const clubEventConverter = {
-  toFirestore: (event) => {
+  toFirestore: (event: ClubEvent) => {
     return {
       id: event.id,
       title: event.title,
@@ -44,13 +51,16 @@ const clubEventConverter = {
       location: event.location,
       imgUrl: event.imgUrl,
       externalUrl: event.externalUrl,
-      category: event.tempCategory,
+      category: event.category,
       datetime: event.datetime,
       userAttendees: event.userAttendees,
       additionalAttendance: event.additionalAttendance,
     };
   },
-  fromFirestore: (snapshot, options) => {
+  fromFirestore: (
+    snapshot: QueryDocumentSnapshot<DocumentData>,
+    options: SnapshotOptions
+  ) => {
     const data = snapshot.data(options);
     return new ClubEvent(
       data.id,

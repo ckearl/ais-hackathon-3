@@ -5,8 +5,9 @@ import "./css/styles.css";
 import "./css/form.css";
 import { Login } from "./shared/auth/login";
 import { EventCheckInPage } from "./member/eventCheckInPage";
-import ProtectedRoute from "./officer/officerRoute";
+import ProtectedRoute from "./officer/protectedRoute";
 import CreateEvent from "./officer/createEditEvent";
+import { UserHome } from "./member/userHome";
 
 function App() {
   return (
@@ -15,11 +16,28 @@ function App() {
       <div className="body bg-dark text-light">
         <Routes>
           <Route path="/" element={<Login />} />
-          {/* <Route path="/userHome" element={<UserHome />} /> */}
           <Route path="/event/:eventId" element={<EventCheckInPage />} />
+
+          {/* Routes containing a ProtectedRoute are meant to ensure the user is authenticated before being able to visit them */}
+          {/* In cases where isOfficerOnly is true, these routes also ensure the user is an officer before being able to visit them */}
+
           <Route
             path="/createEvent"
-            element={<ProtectedRoute element={<CreateEvent />} />}
+            element={
+              <ProtectedRoute isOfficerOnly={true} element={<CreateEvent />} />
+            }
+          />
+          <Route
+            path="/adminHome"
+            element={
+              <ProtectedRoute isOfficerOnly={true} element={<UserHome />} />
+            }
+          />
+          <Route
+            path="/userHome"
+            element={
+              <ProtectedRoute isOfficerOnly={false} element={<UserHome />} />
+            }
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

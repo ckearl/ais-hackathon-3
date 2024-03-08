@@ -39,6 +39,10 @@ button {
     brightness(101%) contrast(100%);
 }
 
+.no-margin {
+  margin: 0;
+}
+
 /* footer {
   width: calc(100vw - 200px);
   height: 100px;

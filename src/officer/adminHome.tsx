@@ -3,7 +3,7 @@ import { EventList } from "../member/eventList";
 const AdminHome = () => {
   return (
     <div>
-      <EventList />
+      <EventList events={[]} />
     </div>
   );
 };

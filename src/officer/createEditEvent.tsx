@@ -1,10 +1,10 @@
 // CreateEventForm.tsx
 import React, { useContext, useState } from "react";
-import { Timestamp } from "firebase/firestore"; // Import Timestamp from Firestore
-import { ClubEvent } from "../models/clubevent"; // Adjust the import path as necessary
+import { Timestamp } from "firebase/firestore";
+import { ClubEvent } from "../models/clubevent";
 import { FirebaseContext } from "../shared/firebaseProvider";
 
-function CreateEvent() {
+export function CreateEvent() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -19,6 +19,7 @@ function CreateEvent() {
 
   const fireContext = useContext(FirebaseContext);
 
+  // Update formData each time the user inputs new values into the form
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -139,5 +140,3 @@ function CreateEvent() {
     </div>
   );
 }
-
-export default CreateEvent;
