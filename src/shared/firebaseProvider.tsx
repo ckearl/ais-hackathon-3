@@ -5,6 +5,7 @@ import {
   useState,
   useEffect,
   useMemo,
+  useCallback,
 } from "react";
 import { AppUser } from "../models/appuser";
 import { Database } from "./firebase/database";
@@ -24,8 +25,8 @@ const auth = getAuth();
 interface FirebaseContextType {
   user: AppUser | null;
   isAuthenticated: boolean;
-  googleSignIn: () => void;
-  userSignOut: () => void;
+  googleSignIn: () => Promise<void>;
+  userSignOut: () => Promise<void>;
   db: Database;
 }
 
@@ -33,23 +34,22 @@ interface FirebaseProviderProps {
   children: ReactNode;
 }
 
-export const FirebaseContext = createContext<FirebaseContextType | null>(null);
+export const FirebaseContext = createContext<FirebaseContextType | undefined>(
+  undefined
+);
 export const FirebaseProvider: FC<FirebaseProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AppUser | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const db = useMemo(() => new Database(app), []);
-  const tempUser = auth.currentUser;
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        db.fetchUser(currentUser.uid).then((fetchedUser) => {
-          if (fetchedUser) {
-            setUser(fetchedUser);
-            setIsAuthenticated(true);
-          }
-        });
+        const fetchedUser = await db.fetchUser(currentUser.uid);
+        setUser(fetchedUser || null);
+        setIsAuthenticated(!!fetchedUser);
       } else {
+        console.log("No current user");
         setUser(null);
         setIsAuthenticated(false);
       }
@@ -58,39 +58,19 @@ export const FirebaseProvider: FC<FirebaseProviderProps> = ({ children }) => {
     return () => unsubscribe(); // Cleanup subscription
   }, [db]);
 
-  // Example effect to simulate user authentication
-  useEffect(() => {
-    // Simulate fetching user data
-    const fetchUser = async () => {
-      // Replace this with actual authentication logic
-      if (tempUser) {
-        const fetchedUser = await db.fetchUser(tempUser.uid);
-        if (fetchedUser !== undefined) {
-          setUser(fetchedUser);
-          setIsAuthenticated(true);
-        }
-      }
-    };
-
-    fetchUser();
-  }, [tempUser, db]);
-
-  function googleSignIn() {
+  const googleSignIn = useCallback(async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        db.fetchUser(user.uid).then((fetchedUser) => {
-          if (fetchedUser) {
-            setUser(fetchedUser);
-            setIsAuthenticated(true);
-          }
-        });
-      })
-      .catch((error) => console.log(error));
-  }
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const fetchedUser = await db.fetchUser(result.user.uid);
+      setUser(fetchedUser || null);
+      setIsAuthenticated(!!fetchedUser);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [db]);
 
-  function userSignOut() {
+  const userSignOut = useCallback(async () => {
     signOut(auth)
       .then(() => {
         setUser(null);
@@ -100,9 +80,12 @@ export const FirebaseProvider: FC<FirebaseProviderProps> = ({ children }) => {
       .catch((error) => {
         console.log("Signout Unsuccessful");
       });
-  }
+  }, []);
 
-  const value = { user, isAuthenticated, googleSignIn, userSignOut, db };
+  const value = useMemo(
+    () => ({ user, isAuthenticated, googleSignIn, userSignOut, db }),
+    [user, isAuthenticated, googleSignIn, userSignOut, db]
+  );
 
   return (
     <FirebaseContext.Provider value={value}>

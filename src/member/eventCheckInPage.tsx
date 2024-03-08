@@ -29,7 +29,11 @@ export function EventCheckInPage() {
         <form>
           <h2>Error: No eventId found. Please return to the home page.</h2>
           <Link to="/">
-            <input className="ais-button" type="button" value="Home/Login" />
+            <input
+              className="ais-button background-ais"
+              type="button"
+              value="Home/Login"
+            />
           </Link>
         </form>
       )}
@@ -38,11 +42,11 @@ export function EventCheckInPage() {
           <h2>{eventName}</h2>
           <div id="titleUnderline"></div>
           <input
-            className="ais-button"
+            className="ais-button background-ais"
             type="button"
             onClick={async () => {
               if (!fireContext?.isAuthenticated) {
-                fireContext?.googleSignIn();
+                await fireContext?.googleSignIn();
               }
 
               await db?.registerAttendance(
@@ -55,11 +59,11 @@ export function EventCheckInPage() {
             value="Yes"
           />
           <input
-            className="ais-button"
+            className="ais-button background-ais"
             type="button"
             onClick={async () => {
               if (!fireContext?.isAuthenticated) {
-                fireContext?.googleSignIn();
+                await fireContext?.googleSignIn();
               }
 
               await db?.registerAttendance(

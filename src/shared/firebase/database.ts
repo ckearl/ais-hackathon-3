@@ -85,12 +85,16 @@ class Database {
     const eventRef = doc(this.db, "events", eventId);
 
     // Construct the updates we want to make to the event. Only fields that are changing need to be included.
-    const updateData = {
-      userAttendees: arrayUnion(userId),
-    };
-
+    let updateData;
     if (hasPlusOne) {
-      updateData.userAttendees = increment(1);
+      updateData = {
+        userAttendees: arrayUnion(userId),
+        additionalAttendance: increment(1),
+      };
+    } else {
+      updateData = {
+        userAttendees: arrayUnion(userId),
+      };
     }
 
     await updateDoc(eventRef, updateData);

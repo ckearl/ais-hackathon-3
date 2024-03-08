@@ -48,6 +48,7 @@
   border: 1px solid transparent;
   border-radius: 2px;
   padding: 3px 10px;
+  max-width: fit-content;
   cursor: pointer;
   outline: none;
   font-size: 16px;
@@ -111,7 +112,10 @@ button:focus {
   padding-left: 8px;
   padding-right: 8px;
   max-width: fit-content;
-  background-color: #0f2140;
   font-size: 24px;
   transition: border 0.3s ease-in-out;
+}
+
+.background-ais {
+  background-color: #0f2140;
 }
