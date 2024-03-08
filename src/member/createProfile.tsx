@@ -7,14 +7,21 @@ function CreateProfile() {
       <input type="text" id="firstName" name="firstName" required></input>
       <label htmlFor="lastName">Last Name</label>
       <input type="text" id="lastName" name="lastName" required></input>
-      <label htmlFor="studentType">Student Type</label>
-      <select id="studentType" name="studentType" required>
-        <option value="junior">IS Junior Core</option>
-        <option value="senior">IS Senior</option>
-        <option value="mism">MISM</option>
-        <option value="other-byu">Other BYU Student</option>
-        <option value="other-guest">Other/Guest</option>
-      </select>
+      <label htmlFor="netID">Net ID</label>
+      <input type="text" id="netID" name="netID" required></input>
+      <p>Student Type</p>
+      <div className="radioSelector">
+        <input type="radio" id="junior" name="studentType" value="junior" required></input>
+        <label htmlFor="junior">IS Junior Core</label>
+        <input type="radio" id="senior" name="studentType" value="senior" required></input>
+        <label htmlFor="senior">IS Senior</label>
+        <input type="radio" id="mism" name="studentType" value="mism" required></input>
+        <label htmlFor="mism">MISM</label>
+        <input type="radio" id="other-byu" name="studentType" value="other-byu" required></input>
+        <label htmlFor="other-byu">BYU Student</label>
+        <input type="radio" id="other-guest" name="studentType" value="other-guest" required></input>
+        <label htmlFor="other-guest">Other/Guest</label>
+      </div>
       <button type="submit">Create Account</button>
     </form>
   );
