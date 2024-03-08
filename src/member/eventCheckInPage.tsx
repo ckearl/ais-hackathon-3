@@ -10,7 +10,7 @@ export function EventCheckInPage() {
   const [eventName, setEventName] = useState("");
 
   useEffect(() => {
-    const tempFetchEvent = async () => {
+    const initFetchEvent = async () => {
       if (db && eventId) {
         const clubEvent = await db.fetchEvent(eventId);
 
@@ -20,7 +20,7 @@ export function EventCheckInPage() {
       }
     };
 
-    tempFetchEvent();
+    initFetchEvent();
   }, [eventId, db]);
 
   return (
