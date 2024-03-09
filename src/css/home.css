@@ -6,81 +6,6 @@
   justify-content: center;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  width: calc(100% - 50px);
-  height: 50px;
-  padding: 0 25px;
-  background-color: var(--primary-dark);
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: space-between;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  padding: 3px 10px;
-  cursor: pointer;
-  transition: border 0.3s ease-in-out;
-}
-
-#signOutBtn,
-#userProfileBtn {
-  color: white;
-  background-color: transparent !important; /* Force the background to be transparent */
-  border: 1px solid transparent;
-  border-radius: 2px;
-  padding: 3px 10px;
-  cursor: pointer;
-  outline: none;
-  font-size: 16px;
-  text-align: center; /* Ensure text is centered as it usually is in links */
-  -webkit-appearance: none; /* Remove default browser styling in WebKit browsers */
-  -moz-appearance: none; /* Remove default browser styling in Mozilla browsers */
-  appearance: none; /* Remove default browser styling */
-  transition: border 0.3s ease-in-out;
-}
-
-nav button:hover,
-nav button:focus {
-  border-color: white; /* Optional: change border color on hover/focus */
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ); /* Optional: slight background color on hover/focus for visual feedback */
-}
-
-@media (hover: hover) {
-  nav a:hover {
-    border: 1px solid white;
-  }
-
-  #signOutBtn:hover {
-    border: 1px solid white;
-  }
-}
-
-a.imgLink {
-  position: fixed;
-  top: 0;
-  height: 35px;
-  margin: 7.5px;
-  border-radius: 20px;
-  z-index: 1;
-}
-
-a.imgLink img {
-  width: 35px;
-  height: 35px;
-}
-
 #bodyContainer {
   min-width: 350px;
   max-width: 675px;
@@ -118,8 +43,7 @@ a.imgLink img {
   color: var(--primary-color);
   background-color: white;
   border: 1.5px solid var(--primary-color);
-  transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out,
-    border 0.35s ease-in-out;
+  transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out, border 0.35s ease-in-out;
 }
 
 #toggleEventList > button.toggleOn {
