@@ -16,6 +16,7 @@ import {
   updateDoc,
   arrayUnion,
   increment,
+  setDoc,
 } from "firebase/firestore";
 
 // Initialize Firebase
@@ -98,15 +99,19 @@ class Database {
 
   async addUser(appUser: AppUser) {
     try {
-      if (appUser["id"]) {
-        delete appUser["id"];
+      let docRef;
+      if (appUser.id != null) {
+        docRef = doc(this.db, "appusers", appUser.id).withConverter(
+          appUserConverter
+        );
+
+        try {
+          await setDoc(docRef, appUser);
+        } catch (error) {
+          console.error("Could not add user: ", error);
+        }
       }
-      const docRef = await addDoc(
-        collection(this.db, "appusers"),
-        appUserConverter.toFirestore(appUser)
-      );
       // console.log("Document written with ID: ", docRef.id);
-      return docRef;
     } catch (error) {
       console.error("Error adding user: ", error);
       throw error;
@@ -114,6 +119,7 @@ class Database {
   }
 
   async fetchUser(userId: string): Promise<AppUser | undefined> {
+    console.log(`fetchuserId: ${userId}`);
     const userRef = doc(this.db, "appusers", userId).withConverter(
       appUserConverter
     );

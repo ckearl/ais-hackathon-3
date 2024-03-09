@@ -55,19 +55,19 @@ export function EventCheckInPage() {
 
                 const auth = getAuth();
 
-                let curUserId: undefined | string = undefined;
+                let curUserId: undefined | string | null = undefined;
                 if (auth && auth.currentUser) {
                   curUserId = auth.currentUser.uid;
-                } else if (fireContext && fireContext.user) {
+                } else if (
+                  fireContext &&
+                  fireContext.user &&
+                  fireContext.user.id != null
+                ) {
                   curUserId = fireContext.user.id;
                 }
 
-                if (curUserId !== undefined) {
-                  await db?.registerAttendance(
-                    eventId,
-                    fireContext?.user?.id,
-                    true
-                  );
+                if (curUserId !== undefined && curUserId != null) {
+                  await db?.registerAttendance(eventId, curUserId, true);
 
                   // If event has external navigation url (like handshake) send them there
                   // Otherwise, take them back to the home page
@@ -94,19 +94,19 @@ export function EventCheckInPage() {
 
                 const auth = getAuth();
 
-                let curUserId: undefined | string = undefined;
+                let curUserId: undefined | string | null = undefined;
                 if (auth && auth.currentUser) {
                   curUserId = auth.currentUser.uid;
-                } else if (fireContext && fireContext.user) {
+                } else if (
+                  fireContext &&
+                  fireContext.user &&
+                  fireContext.user.id != null
+                ) {
                   curUserId = fireContext.user.id;
                 }
 
-                if (curUserId !== undefined) {
-                  await db?.registerAttendance(
-                    eventId,
-                    fireContext?.user?.id,
-                    false
-                  );
+                if (curUserId !== undefined && curUserId != null) {
+                  await db?.registerAttendance(eventId, curUserId, false);
 
                   // If event has external navigation url (like handshake) send them there
                   // Otherwise, take them back to the home page

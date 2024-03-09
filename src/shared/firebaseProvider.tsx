@@ -26,6 +26,7 @@ interface FirebaseContextType {
   user: AppUser | null;
   isAuthenticated: boolean;
   googleSignIn: () => Promise<void>;
+  setNewUser: (newUser: AppUser) => Promise<void>;
   userSignOut: () => Promise<void>;
   db: Database;
 }
@@ -45,9 +46,22 @@ export const FirebaseProvider: FC<FirebaseProviderProps> = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        const fetchedUser = await db.fetchUser(currentUser.uid);
-        setUser(fetchedUser || null);
-        setIsAuthenticated(!!fetchedUser);
+        if (auth.currentUser != null) {
+          console.log(`AuthUserId: ${auth.currentUser.uid}`);
+        }
+        if (currentUser != null) {
+          console.log(`currentuserUserId: ${currentUser.uid}`);
+        }
+        const fetchedUser = await db.fetchUser(
+          auth.currentUser != null ? auth.currentUser.uid : currentUser.uid
+        );
+        if (fetchedUser) {
+          setUser(fetchedUser || null);
+          setIsAuthenticated(fetchedUser != null && fetchedUser !== undefined);
+        } else {
+          setIsAuthenticated(true);
+          setUser(null);
+        }
       } else {
         console.log("No current user");
         setUser(null);
@@ -82,9 +96,24 @@ export const FirebaseProvider: FC<FirebaseProviderProps> = ({ children }) => {
       });
   }, []);
 
+  const setNewUser = useCallback(
+    async (newUser: AppUser) => {
+      await db.addUser(newUser); // Add the user to the database
+      setUser(newUser);
+    },
+    [db]
+  );
+
   const value = useMemo(
-    () => ({ user, isAuthenticated, googleSignIn, userSignOut, db }),
-    [user, isAuthenticated, googleSignIn, userSignOut, db]
+    () => ({
+      user,
+      isAuthenticated,
+      googleSignIn,
+      setNewUser,
+      userSignOut,
+      db,
+    }),
+    [user, isAuthenticated, googleSignIn, setNewUser, userSignOut, db]
   );
 
   return (

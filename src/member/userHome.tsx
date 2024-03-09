@@ -37,6 +37,7 @@ export function UserHome() {
             futureEvents.push(tempEvent);
           } else if (
             fireContext?.user &&
+            fireContext?.user.id != null &&
             (fireContext?.user.isOfficer ||
               (tempEvent.userAttendees &&
                 tempEvent.userAttendees.includes(fireContext?.user.id)))
