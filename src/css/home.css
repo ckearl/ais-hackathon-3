@@ -43,7 +43,8 @@
   color: var(--primary-color);
   background-color: white;
   border: 1.5px solid var(--primary-color);
-  transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out, border 0.35s ease-in-out;
+  transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out,
+    border 0.35s ease-in-out;
 }
 
 #toggleEventList > button.toggleOn {

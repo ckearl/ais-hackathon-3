@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import "../css/styles.css";
 import "../css/home.css";
+import "../css/styles.css";
 import { ClubEvent } from "../models/clubevent";
 import { FirebaseContext } from "../shared/firebaseProvider";
 import QRCode from "qrcode";
@@ -84,7 +84,16 @@ export function ViewEvent() {
             <p></p>
           )}
           <div className="eventActions">
-            <Link to={`/deleteEvent/${event.id}`}>Delete</Link>{" "}
+            <button
+              type="button"
+              onClick={() => {
+                if (eventId) {
+                  fireContext?.db.deleteEvent(eventId);
+                }
+              }}
+            >
+              Delete
+            </button>{" "}
             {/* Implement these routes and functionalities */}
             {/* <Link to={`/editEvent/${event.id}`}>Edit</Link> */}
           </div>

@@ -17,6 +17,7 @@ import {
   arrayUnion,
   increment,
   setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 // Initialize Firebase
@@ -72,6 +73,10 @@ class Database {
     // Returns undefined if no matching user is found
     const eventData = eventSnapshot.data();
     return eventData;
+  }
+
+  async deleteEvent(eventId: string): Promise<void> {
+    await deleteDoc(doc(this.db, "events", eventId));
   }
 
   async registerAttendance(
