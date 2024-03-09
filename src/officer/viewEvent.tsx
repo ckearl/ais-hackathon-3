@@ -86,6 +86,7 @@ export function ViewEvent() {
           <div className="eventActions">
             <button
               type="button"
+              className="danger-button"
               onClick={() => {
                 if (eventId) {
                   fireContext?.db.deleteEvent(eventId);
@@ -93,7 +94,7 @@ export function ViewEvent() {
               }}
             >
               Delete
-            </button>{" "}
+            </button>
             {/* Implement these routes and functionalities */}
             {/* <Link to={`/editEvent/${event.id}`}>Edit</Link> */}
           </div>

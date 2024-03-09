@@ -95,6 +95,16 @@ export function UserHome() {
       {showUpcomingEvents && upcomingEvents && (
         <EventList events={upcomingEvents} />
       )}
+      {/* <div id="attendedProgress">
+        <h3>Total: 5/10</h3>
+        <div>
+          <p>2/4<br/><span>Discover</span></p>
+          <p>0/3<br/><span>Connect</span></p>
+          <p>1/2<br/><span>Socialize</span></p>
+          <p>0/2<br/><span>Learn</span></p>
+          <p>1/4<br/><span>Serve</span></p>
+        </div>
+      </div> */}
       {!showUpcomingEvents && attendedEvents && (
         <EventList events={attendedEvents} />
       )}

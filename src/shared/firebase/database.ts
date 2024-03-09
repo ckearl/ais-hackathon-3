@@ -31,16 +31,18 @@ class Database {
 
   // Function to add an event to the "events" collection
   async addEvent(event: ClubEvent) {
-    try {
-      const docRef = await addDoc(
-        collection(this.db, "events"),
-        clubEventConverter.toFirestore(event)
-      );
-      // console.log("Document written with ID: ", docRef.id);
-      return docRef;
-    } catch (error) {
-      // console.error("Error adding document: ", error);
-      throw error;
+    if (event.id != null) {
+      try {
+        const docRef = await doc(this.db, "events", event.id).withConverter(
+          clubEventConverter
+        );
+
+        await setDoc(docRef, event);
+        return docRef;
+      } catch (error) {
+        // console.error("Error adding document: ", error);
+        throw error;
+      }
     }
   }
 
