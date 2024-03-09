@@ -6,12 +6,8 @@ import { Timestamp } from "firebase/firestore";
 
 export function UserHome() {
   const fireContext = useContext(FirebaseContext);
-  const [upcomingEvents, setUpcomingEvents] = useState<ClubEvent[] | null>(
-    null
-  );
-  const [attendedEvents, setAttendedEvents] = useState<ClubEvent[] | null>(
-    null
-  );
+  const [upcomingEvents, setUpcomingEvents] = useState<ClubEvent[] | null>(null);
+  const [attendedEvents, setAttendedEvents] = useState<ClubEvent[] | null>(null);
   const [showUpcomingEvents, setShowUpcomingEvents] = useState<boolean>(true);
   // const [];
 
@@ -30,18 +26,10 @@ export function UserHome() {
         for (let tempEvent of events) {
           if (
             tempEvent.datetime &&
-            (tempEvent.datetime.seconds > currentTimestamp.seconds ||
-              (tempEvent.datetime.seconds === currentTimestamp.seconds &&
-                tempEvent.datetime.nanoseconds > currentTimestamp.nanoseconds))
+            (tempEvent.datetime.seconds > currentTimestamp.seconds || (tempEvent.datetime.seconds === currentTimestamp.seconds && tempEvent.datetime.nanoseconds > currentTimestamp.nanoseconds))
           ) {
             futureEvents.push(tempEvent);
-          } else if (
-            fireContext?.user &&
-            fireContext?.user.id != null &&
-            (fireContext?.user.isOfficer ||
-              (tempEvent.userAttendees &&
-                tempEvent.userAttendees.includes(fireContext?.user.id)))
-          ) {
+          } else if (fireContext?.user && fireContext?.user.id != null && (fireContext?.user.isOfficer || (tempEvent.userAttendees && tempEvent.userAttendees.includes(fireContext?.user.id)))) {
             pastEvents.push(tempEvent);
           }
         }
@@ -61,40 +49,20 @@ export function UserHome() {
   return (
     <div id="bodyContainer">
       <div id="toggleEventList">
-        <button
-          id="attendedToggle"
-          className={showUpcomingEvents ? "" : "toggleOn"}
-          onClick={() => toggle()}
-        >
-          {fireContext != null &&
-          fireContext.user &&
-          fireContext.user.isOfficer ? (
-            <p className="no-margin">Past</p>
-          ) : (
-            <p className="no-margin">Attended</p>
-          )}
-        </button>
-        <button
-          id="upcomingToggle"
-          className={showUpcomingEvents ? "toggleOn" : ""}
-          onClick={() => toggle()}
-        >
+        <button id="upcomingToggle" className={showUpcomingEvents ? "toggleOn" : ""} onClick={() => toggle()}>
           Upcoming
+        </button>
+        <button id="attendedToggle" className={showUpcomingEvents ? "" : "toggleOn"} onClick={() => toggle()}>
+          {fireContext != null && fireContext.user && fireContext.user.isOfficer ? <p className="no-margin">Past</p> : <p className="no-margin">Attended</p>}
         </button>
       </div>
       {showUpcomingEvents && !upcomingEvents && <h3>Loading Events...</h3>}
       {showUpcomingEvents && upcomingEvents && <h2>Upcoming Events</h2>}
       {!showUpcomingEvents && !attendedEvents && <h3>Loading Events...</h3>}
-      {!showUpcomingEvents &&
-        attendedEvents &&
-        !fireContext?.user?.isOfficer && <h2>Events Attended</h2>}
-      {!showUpcomingEvents &&
-        attendedEvents &&
-        fireContext?.user?.isOfficer && <h2>Past Events</h2>}
+      {!showUpcomingEvents && attendedEvents && !fireContext?.user?.isOfficer && <h2>Events Attended</h2>}
+      {!showUpcomingEvents && attendedEvents && fireContext?.user?.isOfficer && <h2>Past Events</h2>}
       {/* Show upcoming events or past events depending on toggle */}
-      {showUpcomingEvents && upcomingEvents && (
-        <EventList events={upcomingEvents} />
-      )}
+      {showUpcomingEvents && upcomingEvents && <EventList events={upcomingEvents} />}
       {/* <div id="attendedProgress">
         <h3>Total: 5/10</h3>
         <div>
@@ -105,9 +73,7 @@ export function UserHome() {
           <p>1/4<br/><span>Serve</span></p>
         </div>
       </div> */}
-      {!showUpcomingEvents && attendedEvents && (
-        <EventList events={attendedEvents} />
-      )}
+      {!showUpcomingEvents && attendedEvents && <EventList events={attendedEvents} />}
     </div>
   );
 }

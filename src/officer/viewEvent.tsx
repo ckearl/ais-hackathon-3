@@ -24,22 +24,17 @@ export function ViewEvent() {
           setEvent(eventData);
 
           // Convert datetime into readable format
-          const formattedDate = eventData.datetime
-            .toDate()
-            .toLocaleString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
+          const formattedDate = eventData.datetime.toDate().toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
 
           console.log(window.location.href);
 
-          const baseURL = window.location.href.substring(
-            0,
-            window.location.href.indexOf("/viewEvent")
-          );
+          const baseURL = window.location.href.substring(0, window.location.href.indexOf("/viewEvent"));
 
           const qrCode = await QRCode.toDataURL(`${baseURL}/event/${eventId}`);
 
@@ -67,21 +62,13 @@ export function ViewEvent() {
           <p>{eventDateTime}</p>
           <p>{event.description}</p>
           <p>{event.externalUrl}</p>
+          {QRCodeData ? <img src={QRCodeData} alt="Event QR Code" className="qr-code-img" /> : <p>Loading QR Code...</p>}
           {QRCodeData ? (
-            <img src={QRCodeData} alt="Event QR Code" />
-          ) : (
-            <p>Loading QR Code...</p>
-          )}
-          {QRCodeData ? (
-            <a
-              className="link-button"
-              href={QRCodeData}
-              download={`AIS_${event.title}.png`}
-            >
+            <a className="link-button" href={QRCodeData} download={`AIS_${event.title}.png`}>
               Download QR Code
             </a>
           ) : (
-            <p></p>
+            <></>
           )}
           <div className="eventActions">
             <button

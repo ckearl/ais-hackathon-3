@@ -35,26 +35,23 @@ export function EventCard({ ...EventCardProps }) {
         <p>{EventCardProps.event.description}</p>
       </div>
       {/* Allow only officers to open the event and see further details, including QR code */}
-      {fireContext != null &&
-        fireContext.user != null &&
-        fireContext.user.isOfficer &&
-        EventCardProps.event &&
-        EventCardProps.event.userAttendees && (
-          <>
-            <div className="eventAttendance">
-              <h3>
-                {EventCardProps.event.additionalAttendance +
-                !Number.isNaN(EventCardProps.event.userAttendees.length)
-                  ? EventCardProps.event.userAttendees.length
-                  : 0}
-              </h3>
-              <p>Attended</p>
-            </div>
-            <div className="eventOpen">
-              <Link to={`/viewEvent/${EventCardProps.event.id}`}>Open</Link>
-            </div>
-          </>
-        )}
+      {fireContext != null && fireContext.user != null && fireContext.user.isOfficer && EventCardProps.event && EventCardProps.event.userAttendees && (
+        <div className="officerEventInfo">
+          <div
+            className={`eventAttendance ${
+              {
+                /* showUpcomingEvents ? "hidden" : ""*/
+              }
+            }`}
+          >
+            <h3>{EventCardProps.event.additionalAttendance + !Number.isNaN(EventCardProps.event.userAttendees.length) ? EventCardProps.event.userAttendees.length : 0}</h3>
+            <p>Attended</p>
+          </div>
+          {/* <div className="eventOpen"> */}
+          <Link to={`/viewEvent/${EventCardProps.event.id}`}>Open</Link>
+          {/* </div> */}
+        </div>
+      )}
     </div>
   );
 }

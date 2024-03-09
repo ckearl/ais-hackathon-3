@@ -10,28 +10,25 @@ export function Header() {
   return (
     <>
       <nav>
-        {fireContext != null &&
-          fireContext.isAuthenticated &&
-          fireContext.user != null && (
-            <input
-              id="signOutBtn"
-              className="ais-button background-ais"
-              type="button"
-              onClick={async () => {
-                await fireContext?.userSignOut();
-              }}
-              value="Sign Out"
-            />
-          )}
+        {fireContext != null && fireContext.isAuthenticated && fireContext.user != null && (
+          <input
+            id="signOutBtn"
+            className="ais-button background-ais"
+            type="button"
+            onClick={async () => {
+              await fireContext?.userSignOut();
+            }}
+            value="Sign Out"
+          />
+        )}
         {/* {fireContext != null &&
           fireContext.isAuthenticated &&
           fireContext.user != null && <Link to="/">Home</Link>} */}
-        {fireContext != null &&
-          fireContext.isAuthenticated &&
-          fireContext.user != null &&
-          fireContext.user.isOfficer && (
-            <NavLink to="/createEvent">Create Event</NavLink>
-          )}
+        {fireContext != null && fireContext.isAuthenticated && fireContext.user != null && fireContext.user.isOfficer && (
+          <NavLink className="ais-button background-ais" to="/createEvent">
+            Create Event
+          </NavLink>
+        )}
       </nav>
       <a className="imgLink" href="/">
         <img src="/images/logo.png" alt="AIS-logo"></img>
