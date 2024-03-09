@@ -2,6 +2,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { FirebaseContext } from "../shared/firebaseProvider";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../css/submit_success.css";
+import "../css/styles.css";
 import { ClubEvent } from "../models/clubevent";
 import { getAuth } from "firebase/auth";
 
