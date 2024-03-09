@@ -1,5 +1,5 @@
-// import "../css/styles.css";
-import "../css/home.css";
+import "../css/styles.css";
+// import "../css/home.css";
 import { useContext } from "react";
 import { FirebaseContext } from "./firebaseProvider";
 import { NavLink } from "react-router-dom";

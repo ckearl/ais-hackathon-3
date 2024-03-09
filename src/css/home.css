@@ -1,4 +1,5 @@
-body {
+/*body*/
+#root {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +49,12 @@ nav a {
 nav button:hover,
 nav button:focus {
   border-color: white; /* Optional: change border color on hover/focus */
-  background-color: rgba(255, 255, 255, 0.1); /* Optional: slight background color on hover/focus for visual feedback */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Optional: slight background color on hover/focus for visual feedback */
 }
 
 @media (hover: hover) {
@@ -112,7 +118,8 @@ a.imgLink img {
   color: var(--primary-color);
   background-color: white;
   border: 1.5px solid var(--primary-color);
-  transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out, border 0.35s ease-in-out;
+  transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out,
+    border 0.35s ease-in-out;
 }
 
 #toggleEventList > button.toggleOn {
