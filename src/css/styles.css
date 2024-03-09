@@ -25,7 +25,8 @@ label,
 input,
 select,
 textarea,
-button {
+button,
+input#googleSignInBtn.ais-button {
   font-family: "Open Sans", sans-serif;
 }
 
@@ -42,7 +43,7 @@ button {
   margin: 0;
 }
 
-nav {
+#root nav {
   position: fixed;
   top: 0;
   width: 100%;

@@ -63,7 +63,7 @@ textarea {
 }
 
 form button,
-form button.ais-button {
+form input#googleSignInBtn.ais-button {
   background-color: var(--primary-color);
   color: white;
   border: none;
@@ -76,10 +76,16 @@ form button.ais-button {
   border-radius: 2px;
 }
 
+form input#googleSignInBtn.ais-button {
+  padding: 15px;
+  font-size: 1.25em;
+}
+
 @media (hover: hover) {
   form button:hover,
-  form button.ais-button:hover {
+  form input#googleSignInBtn.ais-button:hover {
     background-color: var(--primary-dark);
+    border: none;
   }
 }
 
