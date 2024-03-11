@@ -107,6 +107,10 @@ nav button:focus {
   }
 }
 
+.top-padding {
+  height: 256px;
+}
+
 a.imgLink {
   position: fixed;
   top: 0;

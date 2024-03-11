@@ -15,7 +15,9 @@ const CreateEvent: React.FC = () => {
     eventDescription: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -54,7 +56,11 @@ const CreateEvent: React.FC = () => {
       <title>AIS Events - Create Event</title>
       <link rel="icon" href="assets/logo.png" type="image/x-icon" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+      />
       <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap"
         rel="stylesheet"
@@ -72,6 +78,50 @@ const CreateEvent: React.FC = () => {
           onChange={handleChange}
           required
         />
+
+        <p>Event Category</p>
+        <div className="radioSelector">
+          <input
+            type="radio"
+            id="discoverCategory"
+            name="eventCategory"
+            value="Discover"
+            required
+          ></input>
+          <label htmlFor="discoverCategory">Discover</label>
+          <input
+            type="radio"
+            id="connectCategory"
+            name="eventCategory"
+            value="Connect"
+            required
+          ></input>
+          <label htmlFor="connectCategory">Connect</label>
+          <input
+            type="radio"
+            id="socializeCategory"
+            name="eventCategory"
+            value="Socialize"
+            required
+          ></input>
+          <label htmlFor="socializeCategory">Socialize</label>
+          <input
+            type="radio"
+            id="learnCategory"
+            name="eventCategory"
+            value="Learn"
+            required
+          ></input>
+          <label htmlFor="learnCategory">Learn</label>
+          <input
+            type="radio"
+            id="serveCategory"
+            name="eventCategory"
+            value="Serve"
+            required
+          ></input>
+          <label htmlFor="serveCategory">Serve</label>
+        </div>
 
         <label htmlFor="eventDate">Event Date</label>
         <input

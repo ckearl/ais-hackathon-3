@@ -40,7 +40,7 @@ class Database {
         await setDoc(docRef, event);
         return docRef;
       } catch (error) {
-        // console.error("Error adding document: ", error);
+        console.error("Error adding document: ", error);
         throw error;
       }
     }

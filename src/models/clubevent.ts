@@ -14,6 +14,7 @@ class ClubEvent {
   externalUrl: string = "";
   category: string = "";
   datetime: Timestamp;
+  eventDuration: number; // In hours
   userAttendees: string[] = [];
   additionalAttendance: number = 0;
 
@@ -26,6 +27,7 @@ class ClubEvent {
     tempExternalUrl: string,
     tempCategory: string,
     tempDateTime: Timestamp,
+    tempEventDuration: number,
     tempUserAttendees: string[],
     tempAdditionalAttendance: number
   ) {
@@ -37,6 +39,7 @@ class ClubEvent {
     this.externalUrl = tempExternalUrl;
     this.category = tempCategory;
     this.datetime = tempDateTime;
+    this.eventDuration = tempEventDuration;
     this.userAttendees = tempUserAttendees;
     this.additionalAttendance = tempAdditionalAttendance;
   }
@@ -53,6 +56,7 @@ const clubEventConverter = {
       externalUrl: event.externalUrl,
       category: event.category,
       datetime: event.datetime,
+      eventDuration: event.eventDuration,
       userAttendees: event.userAttendees,
       additionalAttendance: event.additionalAttendance,
     };
@@ -71,6 +75,7 @@ const clubEventConverter = {
       data.externalUrl,
       data.category,
       data.datetime,
+      data.eventDuration,
       data.userAttendees,
       data.additionalAttendance
     );

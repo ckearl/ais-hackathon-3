@@ -48,6 +48,13 @@ export function UserHome() {
 
   return (
     <div id="bodyContainer">
+      {/* Temporary fix: Push heading down for long lists - need to adjust css formatting */}
+      {(showUpcomingEvents &&
+        upcomingEvents != null &&
+        upcomingEvents.length > 3) ||
+        (!showUpcomingEvents &&
+          attendedEvents != null &&
+          attendedEvents.length > 3 && <div className="top-padding"></div>)}
       <div id="toggleEventList">
         <button id="upcomingToggle" className={showUpcomingEvents ? "toggleOn" : ""} onClick={() => toggle()}>
           Upcoming
