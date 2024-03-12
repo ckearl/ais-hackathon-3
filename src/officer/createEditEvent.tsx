@@ -29,7 +29,7 @@ export function CreateEvent() {
     >
   ) => {
     const { name, value } = e.target;
-    console.log(`Event creation name: ${name}, value: ${value}`);
+    // console.log(`Event creation name: ${name}, value: ${value}`);
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,

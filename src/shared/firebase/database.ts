@@ -31,18 +31,24 @@ class Database {
 
   // Function to add an event to the "events" collection
   async addEvent(event: ClubEvent) {
-    if (event.id != null) {
-      try {
-        const docRef = await doc(this.db, "events", event.id).withConverter(
-          clubEventConverter
-        );
+    try {
+      // Create a new document in the "events" collection. Firestore generates a unique ID for this document.
+      const docRef = await addDoc(
+        collection(this.db, "events").withConverter(clubEventConverter),
+        event
+      );
 
-        await setDoc(docRef, event);
-        return docRef;
-      } catch (error) {
-        console.error("Error adding document: ", error);
-        throw error;
-      }
+      // Update the event object with the generated ID
+      const updatedEvent = { ...event, id: docRef.id };
+
+      // Update the document in Firestore with the new event object that includes the generated ID
+      await setDoc(docRef, updatedEvent);
+
+      // Return the updated event object or the document reference as needed
+      return { ...docRef, event: updatedEvent };
+    } catch (error) {
+      console.error("DbError adding document: ", error);
+      throw error;
     }
   }
 
