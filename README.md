@@ -1,15 +1,19 @@
+# welcome to the solution
+
 Clone repo
 
-Run "npm ci"
+Run `npm ci`
 
-Run "npm start"
+Run `npm start`
 
 If "npm start" doesn't work, send us your gmail and we will add you to the Firebase project.
 
 Then, you can run:
 firebase login (login with matching gmail)
 
-firebase serve
+`firebase serve`
+
+## Please note that you will need a config file to run the firebase server locally. Contact toph if you need it
 
 To add an admin:
 
